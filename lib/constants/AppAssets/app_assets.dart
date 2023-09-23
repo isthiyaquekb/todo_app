@@ -21,6 +21,16 @@ class AppAssets {
   static const String menu = "assets/images/svg/menu.svg";
   static const String sun = "assets/images/svg/sun_icon.svg";
   static const String moon = "assets/images/svg/moon.svg";
+  static const String addIcon = "assets/images/svg/add_icon.svg";
+  static const String calenderIcon = "assets/images/svg/calendar.svg";
+  static const String timeIcon = "assets/images/svg/time.svg";
+  static const String bellIcon = "assets/images/svg/bell.svg";
+  static const String arrowForwardIcon = "assets/images/svg/arrow_right.svg";
+  static const String arrowDownIcon = "assets/images/svg/arrow_down.svg";
+  static const String workIcon = "assets/images/svg/work.svg";
+  static const String familyIcon = "assets/images/svg/family.svg";
+  static const String selfCardIcon = "assets/images/svg/heart.svg";
+  static const String backIcon = "assets/images/svg/arrow_back.svg";
 
   // Bottom Nav
   static const String home = "assets/images/svg/home.svg";
@@ -37,15 +47,8 @@ class AppAssets {
 
   //Lottie JSON
   static const String splashLottie = "assets/lottie/fish_jump.json";
+  static const String noInternetLottie = "assets/lottie/no_connection.json";
   static const String fishAnimationLottie = "assets/lottie/animation_fish.json";
   static const String mildWaves = "assets/lottie/mild_waves_bottom.json";
-
-  //NOT FOUND
-  static const String notFoundBG = "assets/images/not_found_bg.svg";
-  static const String homeIcon = "assets/images/home.svg";
-  static const String addIcon = "assets/images/add_icon.svg";
-  static const String saleIcon = "assets/images/sale.svg";
-  static const String distributionIcon = "assets/images/distribution.svg";
-  static const String fishIcon = "assets/images/fish_icon.svg";
 
 }

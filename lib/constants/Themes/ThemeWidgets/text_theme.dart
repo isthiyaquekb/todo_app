@@ -5,75 +5,116 @@ import 'package:todo_app/constants/colors/app_colors.dart';
 class AppTextTheme {
   AppTextTheme._();
   static TextTheme lightTextTheme = TextTheme(
-    headline1: GoogleFonts.quantico(
-        color: Colors.black87,
-        fontSize: 24,
-        fontWeight: FontWeight.w700
-    ),
-    headline2: GoogleFonts.quantico(
+    displayLarge: GoogleFonts.sofiaSans(
         color: Colors.black87,
         fontSize: 34,
         fontWeight: FontWeight.w700
     ),
-    subtitle1: GoogleFonts.quantico(
+    displayMedium: GoogleFonts.sofiaSans(
+        color: Colors.black87,
+        fontSize: 24,
+        fontWeight: FontWeight.w700
+    ),
+    displaySmall: GoogleFonts.sofiaSans(
+        color: Colors.black87,
+        fontSize: 20,
+        fontWeight: FontWeight.w400
+    ),
+    titleLarge: GoogleFonts.sofiaSans(
+        color: Colors.black87,
+        fontSize: 16,
+        fontWeight: FontWeight.w400
+    ),
+    titleMedium: GoogleFonts.sofiaSans(
         color: Colors.black87,
         fontSize: 14,
         fontWeight: FontWeight.w400
     ),
-    subtitle2: GoogleFonts.quantico(
+    titleSmall: GoogleFonts.sofiaSans(
         color: Colors.black87,
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: FontWeight.w400
     ),
-    button: GoogleFonts.quantico(
+
+    labelMedium: GoogleFonts.sofiaSans(
       color: AppColors.textColorLight,
       fontSize: 16,
       fontWeight: FontWeight.w600
     ),
-    bodyText1: GoogleFonts.quantico(
+    labelSmall: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 14,
+        fontWeight: FontWeight.w600
+    ),
+    bodyLarge: GoogleFonts.sofiaSans(
+        color: Colors.black87,
+        fontSize: 18,
+        fontWeight: FontWeight.normal
+    ),
+    bodyMedium: GoogleFonts.sofiaSans(
         color: Colors.black87,
         fontSize: 16,
         fontWeight: FontWeight.normal
     ),
-    bodyText2: GoogleFonts.quantico(
+    bodySmall: GoogleFonts.sofiaSans(
         color: Colors.black87,
         fontSize: 14,
         fontWeight: FontWeight.normal
     ),
   );
   static TextTheme darkTextTheme = TextTheme(
-    headline1: GoogleFonts.quantico(
-        color: Colors.white,
-        fontSize: 28,
+    displayLarge: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 34,
         fontWeight: FontWeight.w700
     ),
-    headline2: GoogleFonts.quantico(
-        color: Colors.white,
+    displayMedium: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
         fontSize: 24,
         fontWeight: FontWeight.w700
     ),
-    subtitle1: GoogleFonts.quantico(
-        color: Colors.white,
+    displaySmall: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 20,
+        fontWeight: FontWeight.w400
+    ),
+    titleLarge: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 16,
+        fontWeight: FontWeight.w400
+    ),
+    titleMedium: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
         fontSize: 14,
         fontWeight: FontWeight.w400
     ),
-    subtitle2: GoogleFonts.quantico(
-        color: Colors.white,
-        fontSize: 16,
+    titleSmall: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 12,
         fontWeight: FontWeight.w400
     ),
-    button: GoogleFonts.quantico(
-        color: AppColors.textColorDark,
+    labelMedium: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
         fontSize: 16,
         fontWeight: FontWeight.w600
     ),
-    bodyText1: GoogleFonts.quantico(
-        color: Colors.white,
+    labelSmall: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 14,
+        fontWeight: FontWeight.w600
+    ),
+    bodyLarge: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
+        fontSize: 18,
+        fontWeight: FontWeight.normal
+    ),
+    bodyMedium: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
         fontSize: 16,
         fontWeight: FontWeight.normal
     ),
-    bodyText2: GoogleFonts.quantico(
-        color: Colors.white,
+    bodySmall: GoogleFonts.sofiaSans(
+        color: AppColors.textColorLight,
         fontSize: 14,
         fontWeight: FontWeight.normal
     ),
