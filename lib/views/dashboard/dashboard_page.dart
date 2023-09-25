@@ -33,11 +33,17 @@ class DashboardPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                        AppAssets.home,
-                        height: 24,
-                        width: 24,
-                      ),
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 8.0),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.end,
+                         children: [
+                           Text("TASK LIST",style: Theme.of(context).textTheme.displaySmall,),
+                           Text("WORK",style: Theme.of(context).textTheme.displayMedium,),
+                         ],
+                       ),
+                     ),
                       Row(
                         children: [
                           InkWell(
@@ -114,7 +120,35 @@ class DashboardPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.green,
                           ),
-                          child: Container(),
+                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height*0.25,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: AppColors.borderColors)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
+                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(
@@ -123,7 +157,35 @@ class DashboardPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.red,
                           ),
-                          child: Container(),
+                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height*0.25,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: AppColors.borderColors)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
+                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
                         ), Container(
                           margin: const EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 8.0),
@@ -131,7 +193,35 @@ class DashboardPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.blue,
                           ),
-                          child: Container(),
+                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height*0.25,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: AppColors.borderColors)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
+                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(
@@ -140,7 +230,35 @@ class DashboardPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.grey,
                           ),
-                          child: Container(),
+                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height*0.25,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: AppColors.borderColors)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
+                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
                         ), Container(
                           margin: const EdgeInsets.symmetric(
                               vertical: 0.0, horizontal: 8.0),

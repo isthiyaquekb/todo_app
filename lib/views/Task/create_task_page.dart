@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/constants/AppAssets/app_assets.dart';
 import 'package:todo_app/constants/Colors/app_colors.dart';
 import 'package:todo_app/controllers/dashboard_controller.dart';
 import 'package:todo_app/controllers/task_controller.dart';
 import 'package:todo_app/widgets/common_container_button.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class CreateTask extends StatelessWidget {
   CreateTask({super.key});
@@ -27,6 +25,9 @@ class CreateTask extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 20,
+              ),
               InkWell(
                   onTap: () {
                     Get.back();
@@ -476,9 +477,9 @@ class CreateTask extends StatelessWidget {
                       )*/
                       Obx(
                         () => CupertinoSwitch(
-                            value: taskController.isExpanded.value,
+                            value: taskController.reminderOn.value,
                             onChanged: (changeValue) {
-                              taskController.isExpanded.value = changeValue;
+                            taskController.reminderOn.value=changeValue;
                             }),
                       ),
                     ],

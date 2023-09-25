@@ -10,7 +10,7 @@ class AppTabBarTheme {
     indicator: BoxDecoration(
         color: AppColors.primaryColorDark,
         borderRadius: BorderRadius.circular(10)),
-    indicatorColor: Colors.black,
+    indicatorColor: Colors.transparent,
   );
 
   static TabBarTheme darkTabBarTheme = TabBarTheme(
@@ -20,6 +20,6 @@ class AppTabBarTheme {
     indicator: BoxDecoration(
         color: AppColors.primaryColorLight,
         borderRadius: BorderRadius.circular(10)),
-    indicatorColor: Colors.white,
+    indicatorColor: Colors.transparent,
   );
 }

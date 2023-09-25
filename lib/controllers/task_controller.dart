@@ -9,11 +9,14 @@ class TaskController extends GetxController {
   var taskEditController = TextEditingController();
   var taskFormKey = GlobalKey<FormState>();
   var isExpanded = false.obs;
+  var reminderOn = false.obs;
   var isTaskValid = false.obs;
   DateTime initialDate = DateTime.now();
   TimeOfDay initialTime = TimeOfDay.now();
   var selectedDate = "".obs;
+  var pickedDate = "".obs;
   var selectedTime = "".obs;
+  var pickedTime = "".obs;
   var taskType = "Work".obs;
 
   @override
@@ -23,6 +26,7 @@ class TaskController extends GetxController {
     selectedTime.value = DateTimeFormatter.formatTimeOfDay(initialTime);
     taskEditController = TextEditingController();
     // GET ALL TASK
+    log("TIME NOW:${DateTime.now()}");
     super.onInit();
   }
 
@@ -32,10 +36,7 @@ class TaskController extends GetxController {
     super.dispose();
   }
 
-  // ADD TASK
-  // UPDATE TASK
-  // DELETE TASK
-
+  //EXPAND
   void expandBox() {
     isExpanded.value = !isExpanded.value;
     update();
@@ -52,7 +53,7 @@ class TaskController extends GetxController {
     Get.focusScope!.unfocus();
     if (isTaskValid.value) {
       saveTaskInDB(
-          TaskModel(title: taskEditController.text, status: false, taskType: taskType.value));
+          TaskModel(title: taskEditController.text, status: false, taskType: taskType.value,taskDate: pickedDate.value,taskTime: pickedTime.value,reminder: reminderOn.value));
     }
   }
 
@@ -71,25 +72,38 @@ class TaskController extends GetxController {
         firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     if (picked != null && picked != initialDate) {
+      pickedDate.value=picked.toString();
       selectedDate.value = DateFormat('EEEE d,MMMM').format(picked);
     }
     update();
   }
 
   Future<void> pickTime(BuildContext context) async {
-    final TimeOfDay? pickedTime = await showTimePicker(
+    final TimeOfDay? picked = await showTimePicker(
         context: context,
         initialTime: initialTime,
         initialEntryMode: TimePickerEntryMode.dialOnly,
         orientation: Orientation.portrait);
-    if (pickedTime != null && pickedTime != initialTime) {
-      selectedTime.value = DateTimeFormatter.formatTimeOfDay(pickedTime);
+    if (picked != null && picked != initialTime) {
+
+      final now = DateTime.now();
+      pickedTime.value= DateTime(now.year, now.month, now.day, picked.hour, picked.minute).toString();
+      selectedTime.value = DateTimeFormatter.formatTimeOfDay(picked);
     }
     update();
   }
 
+  // ADD TASK
   void saveTaskInDB(TaskModel taskModel) async {
     log("XXXX TASK TITLE XXX :${taskModel.title}");
     log("XXXX TASK TYPE XXX :${taskModel.taskType}");
+    log("XXXX TASK DATE XXX :${taskModel.taskDate}");
+    log("XXXX TASK TIME XXX :${taskModel.taskTime}");
+    log("XXXX TASK TIME XXX :${taskModel.taskTime}");
+    log("SAVE THIS TO DB:${taskModel.toJson()}");
   }
+
+// UPDATE TASK
+// DELETE TASK
+
 }
