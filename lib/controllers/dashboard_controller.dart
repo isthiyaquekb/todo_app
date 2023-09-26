@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/constants/AppKeys/app_keys.dart';
 import 'package:todo_app/constants/Themes/app_themes.dart';
 import 'package:todo_app/datasource/network/api_request_methods.dart';
@@ -18,6 +19,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   var selectedIndex=0.obs;
   var selectedTabIndex = 0.obs;
   var taskList=<TaskItem>[].obs;
+  var filterTaskList=<TaskItem>[].obs;
   final pages = [
 
   ];
@@ -74,6 +76,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
 
   void changeTabIndex(int index){
     selectedTabIndex.value=index;
+    filterTaskByDay(myTabs[index].text.toString());
     update();
   }
 
@@ -94,6 +97,20 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
     }catch(e){
 
       log("EXCEPTION:${e.toString()}");
+    }
+  }
+
+  void filterTaskByDay(String day){
+    // Filter the list based on the specified day
+    filterTaskList.value = taskList.where((task) {
+      final taskDate = DateTime.parse(task.taskDate);
+      // Get the day of the week as a string (e.g., "Monday")
+      final dayOfWeek = DateFormat('EEEE').format(DateTime.parse(taskDate.toLocal().toString().split(' ')[0]));
+      return dayOfWeek == day;
+    }).toList();
+    // Print the filtered list
+    for (final task in filterTaskList) {
+      print('Title: ${task.title}, Task Date: ${task.taskDate}');
     }
   }
 }

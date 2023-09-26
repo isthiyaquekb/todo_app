@@ -24,275 +24,966 @@ class DashboardPage extends StatelessWidget {
       body: Row(
         children: [
           Expanded(
-            child: Obx(()=>Column(
+              child: Obx(
+            () => Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(height: 120,width: double.maxFinite,child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text("TASK LIST",style: Theme.of(context).textTheme.displaySmall,),
-                            Text(dashboardController.myTabs[dashboardController.selectedTabIndex.value].text.toString(),style: Theme.of(context).textTheme.displayMedium,),
-                          ],
+                  child: SizedBox(
+                    height: 120,
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "TASK LIST",
+                                style: Theme.of(context).textTheme.displaySmall,
+                              ),
+                              Text(
+                                dashboardController
+                                    .myTabs[dashboardController
+                                        .selectedTabIndex.value]
+                                    .text
+                                    .toString(),
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: (){
-                              Get.toNamed(AppRoutes.createTask);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.toNamed(AppRoutes.createTask);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: SvgPicture.asset(
+                                  AppAssets.addIcon,
+                                  height: 24,
+                                  width: 24,
+                                  color: dashboardController.isDarkMode.value
+                                      ? AppColors.primaryColorLight
+                                      : AppColors.primaryColorDark,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                dashboardController.toggleDarkMode();
+                              },
                               child: SvgPicture.asset(
-                                AppAssets.addIcon,
+                                dashboardController.isDarkMode.value
+                                    ? AppAssets.sun
+                                    : AppAssets.moon,
                                 height: 24,
                                 width: 24,
-                                color: dashboardController.isDarkMode.value?AppColors.primaryColorLight:AppColors.primaryColorDark,
                               ),
                             ),
-                          ),
-                          InkWell(
-                            onTap: (){
-                              dashboardController.toggleDarkMode();
-                            },
-                            child: SvgPicture.asset(
-                              dashboardController.isDarkMode.value?AppAssets.sun:AppAssets.moon,
-                              height: 24,
-                              width: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                Expanded(child:  Align(
-                  alignment: Alignment.center,
-                  child: TabBarView(
-                      controller: dashboardController.tabController,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: GetBuilder<DashboardController>(builder: (controller)=>ListView.builder(itemCount: controller.taskList.length,itemBuilder: (context,index)=>Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: controller.taskList.isNotEmpty?Container(
-                              height: MediaQuery.of(context).size.height*0.25,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.borderColors)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(controller.taskList[index].title,style: Theme.of(context).textTheme.displayMedium,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(DateFormat('d MMM yyyy').format(DateTime.parse(controller.taskList[index].taskDate
-                                        )),style: Theme.of(context).textTheme.titleMedium,),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: TabBarView(
+                        controller: dashboardController.tabController,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: controller.filterTaskList.isNotEmpty
+                                            ? Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.25,
+                                                width: double.maxFinite,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.red200,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    border: Border.all(
+                                                        color: AppColors
+                                                            .borderColors)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        controller
+                                                            .filterTaskList[
+                                                                index]
+                                                            .title,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .displayMedium,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            DateFormat(
+                                                                    'd MMM yyyy')
+                                                                .format(DateTime
+                                                                    .parse(controller
+                                                                        .filterTaskList[
+                                                                            index]
+                                                                        .taskDate)),
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleMedium,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                DateFormat.jm().format(
+                                                                    DateTime.parse(controller
+                                                                        .filterTaskList[
+                                                                            index]
+                                                                        .taskFromTime)),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .titleMedium,
+                                                              ),
+                                                              Text(
+                                                                " - ",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .titleMedium,
+                                                              ),
+                                                              Text(
+                                                                DateFormat.jm().format(
+                                                                    DateTime.parse(controller
+                                                                        .filterTaskList[
+                                                                            index]
+                                                                        .taskToTime)),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .titleMedium,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            : Container(
+                                                height: 120,
+                                                width: 120,
+                                                color: Colors.amber,
+                                                child: Center(
+                                                  child: Text(
+                                                    "No item found",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .displayLarge,
+                                                  ),
+                                                )),
+                                      )),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.orange200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
                                           children: [
-                                            Text(DateFormat.jm().format(DateTime.parse(controller.taskList[index].taskFromTime
-                                            )),style: Theme.of(context).textTheme.titleMedium,),
-                                            Text(" - ",style: Theme.of(context).textTheme.titleMedium,),
-                                            Text(DateFormat.jm().format(DateTime.parse(controller.taskList[index].taskToTime)),style: Theme.of(context).textTheme.titleMedium,),
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ):Container(height: 120,width: 120,color: Colors.amber,child: Center(child: Text("No item found",style: Theme.of(context).textTheme.displayLarge,),)),
-                          )),),
-                        ), Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                          ),
-                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height*0.25,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.borderColors)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
-                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
                             ),
-                          )),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
                           ),
-                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height*0.25,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.borderColors)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
-                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.yellow200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
                             ),
-                          )),
-                        ), Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
                           ),
-                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height*0.25,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.borderColors)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
-                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.green200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
                             ),
-                          )),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
                           ),
-                          child: ListView.builder(itemCount: 7,itemBuilder: (context,index)=>Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height*0.25,
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.borderColors)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Make changes design for new app",style: Theme.of(context).textTheme.displayMedium,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("11 Nov 2023",style: Theme.of(context).textTheme.titleMedium,),
-                                        Text("09:30 -13:00",style: Theme.of(context).textTheme.titleMedium,),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.blue200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
                             ),
-                          )),
-                        ), Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.teal,
                           ),
-                          child: Container(),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0.0, horizontal: 8.0),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.cyanAccent,
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.indigo200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
+                            ),
                           ),
-                          child: Container(),
-                        ),
-                      ]),
-                ),),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: GetBuilder<DashboardController>(
+                              builder: (controller) => ListView.builder(
+                                  itemCount: controller.filterTaskList.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: controller.filterTaskList.isNotEmpty
+                                        ? Container(
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.25,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.violet200,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          border: Border.all(
+                                              color: AppColors
+                                                  .borderColors)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .filterTaskList[
+                                              index]
+                                                  .title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayMedium,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  DateFormat(
+                                                      'd MMM yyyy')
+                                                      .format(DateTime
+                                                      .parse(controller
+                                                      .filterTaskList[
+                                                  index]
+                                                      .taskDate)),
+                                                  style: Theme.of(
+                                                      context)
+                                                      .textTheme
+                                                      .titleMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskFromTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      " - ",
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                    Text(
+                                                      DateFormat.jm().format(
+                                                          DateTime.parse(controller
+                                                              .filterTaskList[
+                                                          index]
+                                                              .taskToTime)),
+                                                      style: Theme.of(
+                                                          context)
+                                                          .textTheme
+                                                          .titleMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                        : Container(
+                                        height: 120,
+                                        width: 120,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: Text(
+                                            "No item found",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                        )),
+                                  )),
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
               ],
-            ),)
-          ),
+            ),
+          )),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: RotatedBox(
               quarterTurns: 3,
               child: TabBar(
@@ -302,8 +993,10 @@ class DashboardPage extends StatelessWidget {
                 indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
                 labelColor: Theme.of(context).tabBarTheme.labelColor,
                 isScrollable: true,
-                unselectedLabelColor: Theme.of(context).tabBarTheme.unselectedLabelColor,
-                unselectedLabelStyle: Theme.of(context).tabBarTheme.unselectedLabelStyle,
+                unselectedLabelColor:
+                    Theme.of(context).tabBarTheme.unselectedLabelColor,
+                unselectedLabelStyle:
+                    Theme.of(context).tabBarTheme.unselectedLabelStyle,
                 tabs: dashboardController.myTabs,
                 onTap: (int index) {
                   dashboardController.changeTabIndex(index);

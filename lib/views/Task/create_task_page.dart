@@ -105,7 +105,7 @@ class CreateTask extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                              taskController.selectedDate.value.isNotEmpty?taskController.selectedDate.value:"Pick a date",
+                              taskController.selectedDate.value.isNotEmpty?taskController.selectedDate.value:"Date",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -145,7 +145,7 @@ class CreateTask extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0),
                             child: Text(
-                              taskController.selectedFromTime.value.isNotEmpty?taskController.selectedFromTime.value:"From",
+                              taskController.selectedFromTime.value.isNotEmpty?taskController.selectedFromTime.value:"Start",
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
@@ -172,7 +172,7 @@ class CreateTask extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0),
                             child: Text(
-                              taskController.selectedToTime.value.isNotEmpty?taskController.selectedToTime.value:"To",
+                              taskController.selectedToTime.value.isNotEmpty?taskController.selectedToTime.value:"End",
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
