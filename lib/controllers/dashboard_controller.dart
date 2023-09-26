@@ -5,6 +5,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:todo_app/constants/AppKeys/app_keys.dart';
 import 'package:todo_app/constants/Themes/app_themes.dart';
+import 'package:todo_app/datasource/network/api_request_methods.dart';
+import 'package:todo_app/datasource/network/network_client.dart';
+import 'package:todo_app/datasource/network/task_api.dart';
+import 'package:todo_app/models/task_model.dart';
 
 class DashboardController extends GetxController with GetSingleTickerProviderStateMixin{
 
@@ -12,9 +16,8 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   var isDarkMode = false.obs;
 
   var selectedIndex=0.obs;
-  var selectedTabIndex = 0;
-
-
+  var selectedTabIndex = 0.obs;
+  var taskList=<TaskItem>[].obs;
   final pages = [
 
   ];
@@ -28,7 +31,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
     Tab(text: 'Saturday'),
     Tab(text: 'Sunday'),
 
-  ];
+  ].obs;
 
   late TabController tabController;
   @override
@@ -46,6 +49,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   @override
   void onReady() {
     // TODO: implement onReady
+    getAllTask();
     super.onReady();
   }
 
@@ -69,7 +73,27 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   }
 
   void changeTabIndex(int index){
-    selectedTabIndex=index;
+    selectedTabIndex.value=index;
     update();
+  }
+
+  //GET TASK ON HOME
+  void getAllTask()async {
+    try{
+      var response = await  TaskAPI.getTask().request();
+      if(response!=null){
+        log("RESP =>${response.toString()}");
+        var responseTask=TaskModel.fromMap(response);
+        if(responseTask.data.isNotEmpty){
+          taskList.value=responseTask.data;
+        }
+        log("TASK LIST LENGTH:${taskList.length}");
+        update();
+      }
+
+    }catch(e){
+
+      log("EXCEPTION:${e.toString()}");
+    }
   }
 }

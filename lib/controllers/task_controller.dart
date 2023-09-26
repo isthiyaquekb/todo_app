@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/controllers/dashboard_controller.dart';
+import 'package:todo_app/datasource/network/task_api.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/utils/date_time_formatter.dart';
 
@@ -15,15 +17,17 @@ class TaskController extends GetxController {
   TimeOfDay initialTime = TimeOfDay.now();
   var selectedDate = "".obs;
   var pickedDate = "".obs;
-  var selectedTime = "".obs;
-  var pickedTime = "".obs;
+  var selectedFromTime = "".obs;
+  var selectedToTime = "".obs;
+  var pickedFromTime = "".obs;
+  var pickedToTime = "".obs;
   var taskType = "Work".obs;
 
   @override
   void onInit() {
     initialDate = DateTime.now();
-    selectedDate.value = DateFormat('EEEE d,MMMM').format(initialDate);
-    selectedTime.value = DateTimeFormatter.formatTimeOfDay(initialTime);
+    // selectedDate.value = DateFormat('EEEE d,MMMM').format(initialDate);
+    // selectedTime.value = DateTimeFormatter.formatTimeOfDay(initialTime);
     taskEditController = TextEditingController();
     // GET ALL TASK
     log("TIME NOW:${DateTime.now()}");
@@ -51,9 +55,15 @@ class TaskController extends GetxController {
   void isValid() {
     isTaskValid.value = taskFormKey.currentState!.validate();
     Get.focusScope!.unfocus();
-    if (isTaskValid.value) {
-      saveTaskInDB(
-          TaskModel(title: taskEditController.text, status: false, taskType: taskType.value,taskDate: pickedDate.value,taskTime: pickedTime.value,reminder: reminderOn.value));
+    if (isTaskValid.value && pickedDate.isNotEmpty && pickedFromTime.isNotEmpty && pickedToTime.isNotEmpty) {
+      saveTaskInDB(TaskItem(
+          title: taskEditController.text,
+          status: false,
+          taskType: taskType.value,
+          taskDate: pickedDate.value,
+          taskFromTime: pickedFromTime.value,
+          taskToTime: pickedToTime.value,
+          reminder: reminderOn.value));
     }
   }
 
@@ -72,8 +82,8 @@ class TaskController extends GetxController {
         firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     if (picked != null && picked != initialDate) {
-      pickedDate.value=picked.toString();
-      selectedDate.value = DateFormat('EEEE d,MMMM').format(picked);
+      pickedDate.value = picked.toString();
+      selectedDate.value.isEmpty?selectedDate.value = DateFormat('EEEE d,MMMM').format(picked):selectedDate.value ="Pick a date";
     }
     update();
   }
@@ -85,25 +95,42 @@ class TaskController extends GetxController {
         initialEntryMode: TimePickerEntryMode.dialOnly,
         orientation: Orientation.portrait);
     if (picked != null && picked != initialTime) {
-
       final now = DateTime.now();
-      pickedTime.value= DateTime(now.year, now.month, now.day, picked.hour, picked.minute).toString();
-      selectedTime.value = DateTimeFormatter.formatTimeOfDay(picked);
+      pickedFromTime.value.isNotEmpty
+          ? pickedToTime.value =
+              DateTime(now.year, now.month, now.day, picked.hour, picked.minute)
+                  .toString()
+          : pickedFromTime.value =
+              DateTime(now.year, now.month, now.day, picked.hour, picked.minute)
+                  .toString();
+      selectedFromTime.value.isNotEmpty
+          ? selectedToTime.value = DateTimeFormatter.formatTimeOfDay(picked)
+          : selectedFromTime.value = DateTimeFormatter.formatTimeOfDay(picked);
     }
     update();
   }
 
   // ADD TASK
-  void saveTaskInDB(TaskModel taskModel) async {
+  void saveTaskInDB(TaskItem taskModel) async {
     log("XXXX TASK TITLE XXX :${taskModel.title}");
     log("XXXX TASK TYPE XXX :${taskModel.taskType}");
     log("XXXX TASK DATE XXX :${taskModel.taskDate}");
-    log("XXXX TASK TIME XXX :${taskModel.taskTime}");
-    log("XXXX TASK TIME XXX :${taskModel.taskTime}");
-    log("SAVE THIS TO DB:${taskModel.toJson()}");
+    log("XXXX TASK FROM TIME XXX :${taskModel.taskFromTime}");
+    log("XXXX TASK TO TIME XXX :${taskModel.taskToTime}");
+    log("SAVE THIS TO DB:${taskModel.toMap()}");
+
+    try {
+      var response = await TaskAPI.addTask(taskModel).request();
+      if (response != null) {
+        log("ADD RESP =>${response.toString()}");
+        Get.find<DashboardController>().getAllTask();
+        Get.back();
+      }
+    } catch (e) {
+      throw e.toString();
+    }
   }
 
 // UPDATE TASK
 // DELETE TASK
-
 }

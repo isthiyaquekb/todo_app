@@ -1,49 +1,77 @@
 // To parse this JSON data, do
 //
-//     final taskModel = taskModelFromJson(jsonString);
+//     final taskModel = taskModelFromMap(jsonString);
 
 import 'dart:convert';
 
-List<TaskModel> taskModelFromJson(String str) => List<TaskModel>.from(json.decode(str).map((x) => TaskModel.fromJson(x)));
+TaskModel taskModelFromMap(String str) => TaskModel.fromMap(json.decode(str));
 
-String taskModelToJson(List<TaskModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String taskModelToMap(TaskModel data) => json.encode(data.toMap());
 
 class TaskModel {
-  int? id;
-  String title;
-  bool status;
-  String taskType;
-  String taskDate;
-  String taskTime;
-  bool reminder;
+  final List<TaskItem> data;
+  final String message;
+  final String status;
 
   TaskModel({
+    required this.data,
+    required this.message,
+    required this.status,
+  });
+
+  factory TaskModel.fromMap(Map<String, dynamic> json) => TaskModel(
+    data: List<TaskItem>.from(json["data"].map((x) => TaskItem.fromMap(x))),
+    message: json["message"],
+    status: json["status"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "data": List<dynamic>.from(data.map((x) => x.toMap())),
+    "message": message,
+    "status": status,
+  };
+}
+
+class TaskItem {
+  final int? id;
+  final String title;
+  final bool status;
+  final String taskType;
+  final String taskDate;
+  final String taskFromTime;
+  final String taskToTime;
+  final bool reminder;
+
+  TaskItem({
     this.id,
     required this.title,
     required this.status,
     required this.taskType,
     required this.taskDate,
-    required this.taskTime,
+    required this.taskFromTime,
+    required this.taskToTime,
     required this.reminder,
   });
 
-  factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
+  factory TaskItem.fromMap(Map<String, dynamic> json) => TaskItem(
     id: json["id"],
     title: json["title"],
     status: json["status"],
     taskType: json["taskType"],
     taskDate: json["taskDate"],
-    taskTime: json["taskTime"],
+    taskFromTime: json["taskFromTime"],
+    taskToTime: json["taskToTime"],
     reminder: json["reminder"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "id": id,
     "title": title,
     "status": status,
     "taskType": taskType,
     "taskDate": taskDate,
-    "taskTime": taskTime,
+    "taskFromTime": taskFromTime,
+    "taskToTime": taskToTime,
     "reminder": reminder,
   };
 }

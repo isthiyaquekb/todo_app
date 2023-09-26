@@ -105,7 +105,7 @@ class CreateTask extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                            taskController.selectedDate.value,
+                              taskController.selectedDate.value.isNotEmpty?taskController.selectedDate.value:"Pick a date",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -121,29 +121,62 @@ class CreateTask extends StatelessWidget {
                     taskController.pickTime(context);
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 8.0),
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.red.shade50,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: AppColors.borderColors, width: 1),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(AppAssets.timeIcon,
-                              color: Colors.red),
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 8.0),
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade50,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: AppColors.borderColors, width: 1),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset(AppAssets.timeIcon,
+                                  color: Colors.red),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              taskController.selectedFromTime.value.isNotEmpty?taskController.selectedFromTime.value:"From",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          taskController.selectedTime.value,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 8.0),
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade50,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: AppColors.borderColors, width: 1),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset(AppAssets.timeIcon,
+                                  color: Colors.red),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              taskController.selectedToTime.value.isNotEmpty?taskController.selectedToTime.value:"To",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
