@@ -108,7 +108,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                        padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                         child: controller.filterTaskList.isNotEmpty
                                             ? Container(
                                                 height: MediaQuery.of(context)
@@ -125,8 +126,8 @@ class DashboardPage extends StatelessWidget {
                                                         color: AppColors
                                                             .borderColors)),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
+                                                  padding:  const EdgeInsets.symmetric(
+                                                      vertical: 16.0, horizontal: 8.0),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -233,7 +234,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -250,8 +252,8 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(
+                                            vertical: 16.0, horizontal: 8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment
@@ -358,7 +360,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -375,8 +378,7 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(vertical: 16.0,horizontal: 8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment
@@ -483,7 +485,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -500,8 +503,8 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(
+                                            vertical: 16.0, horizontal: 8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment
@@ -608,7 +611,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -625,8 +629,8 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(
+                                            vertical: 16.0, horizontal: 8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment
@@ -733,7 +737,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -750,8 +755,8 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(
+                                            vertical: 16.0, horizontal: 8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment
@@ -858,7 +863,8 @@ class DashboardPage extends StatelessWidget {
                               builder: (controller) => ListView.builder(
                                   itemCount: controller.filterTaskList.length,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding:  const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
                                     child: controller.filterTaskList.isNotEmpty
                                         ? Container(
                                       height: MediaQuery.of(context)
@@ -875,8 +881,8 @@ class DashboardPage extends StatelessWidget {
                                               color: AppColors
                                                   .borderColors)),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            16.0),
+                                        padding:  const EdgeInsets.symmetric(
+                                            vertical: 16.0, horizontal:8.0),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment

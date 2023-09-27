@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,16 +9,18 @@ import 'package:todo_app/constants/themes/app_themes.dart';
 
 void main() async {
   await GetStorage.init();
+  if(!Platform.isAndroid){
+    doWhenWindowReady(() {
+      final win = appWindow;
+      const initialSize = Size(470, 680);
+      win.minSize = initialSize;
+      win.size = initialSize;
+      win.alignment = Alignment.center;
+      win.title = "Custom window with Flutter";
+      win.show();
+    });
+  }
   runApp(const MyApp());
-  doWhenWindowReady(() {
-    final win = appWindow;
-    const initialSize = Size(470, 680);
-    win.minSize = initialSize;
-    win.size = initialSize;
-    win.alignment = Alignment.center;
-    win.title = "Custom window with Flutter";
-    win.show();
-  });
 }
 
 class MyApp extends StatelessWidget {
