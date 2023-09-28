@@ -56,12 +56,12 @@ class TaskItem {
   factory TaskItem.fromMap(Map<String, dynamic> json) => TaskItem(
     id: json["id"],
     title: json["title"],
-    status: json["status"],
+    status: json["status"] == 0 ?false:true,
     taskType: json["taskType"],
     taskDate: json["taskDate"],
     taskFromTime: json["taskFromTime"],
     taskToTime: json["taskToTime"],
-    reminder: json["reminder"],
+    reminder: json["reminder"] == 0 ?false:true,
   );
 
   Map<String, dynamic> toMap() => {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/controllers/dashboard_controller.dart';
+import 'package:todo_app/datasource/local/database_helper.dart';
 import 'package:todo_app/datasource/network/task_api.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/utils/date_time_formatter.dart';
@@ -123,6 +124,8 @@ class TaskController extends GetxController {
       var response = await TaskAPI.addTask(taskModel).request();
       if (response != null) {
         log("ADD RESP =>${response.toString()}");
+        var localDBResp=await DatabaseHelper.insertTask(taskModel);
+        log("SAVED IN LOCAL DB RESP =>${localDBResp.toString()}");
         Get.find<DashboardController>().getAllTask();
         Get.back();
       }

@@ -6,8 +6,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:todo_app/constants/Routes/app_routes.dart';
 import 'package:todo_app/constants/themes/app_themes.dart';
+import 'package:todo_app/datasource/local/database_helper.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseHelper.initDB();
   await GetStorage.init();
   if(!Platform.isAndroid){
     doWhenWindowReady(() {

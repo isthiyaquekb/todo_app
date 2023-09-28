@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/constants/AppKeys/app_keys.dart';
 import 'package:todo_app/constants/Themes/app_themes.dart';
+import 'package:todo_app/datasource/local/database_helper.dart';
 import 'package:todo_app/datasource/network/api_request_methods.dart';
 import 'package:todo_app/datasource/network/network_client.dart';
 import 'package:todo_app/datasource/network/task_api.dart';
@@ -52,6 +53,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   void onReady() {
     // TODO: implement onReady
     getAllTask();
+    getTaskFromDB();
     super.onReady();
   }
 
@@ -112,5 +114,11 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
     for (final task in filterTaskList) {
       print('Title: ${task.title}, Task Date: ${task.taskDate}');
     }
+  }
+
+  void getTaskFromDB() async {
+    var queryTaskDB = await DatabaseHelper.readTaskQuery();
+    taskList.assignAll(queryTaskDB!.map((e) => TaskItem.fromMap(e)).toList());
+
   }
 }
