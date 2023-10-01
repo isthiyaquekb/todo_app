@@ -4,15 +4,15 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:todo_app/constants/Routes/app_routes.dart';
 import 'package:todo_app/constants/themes/app_themes.dart';
 import 'package:todo_app/datasource/local/database_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DatabaseHelper.initDB();
   await GetStorage.init();
-  if(!Platform.isAndroid){
+  if (!Platform.isAndroid && Platform.isWindows) {
     doWhenWindowReady(() {
       final win = appWindow;
       const initialSize = Size(470, 680);
@@ -22,7 +22,10 @@ void main() async {
       win.title = "Custom window with Flutter";
       win.show();
     });
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi; // Set the database factory
   }
+  await DatabaseHelper.initDB();
   runApp(const MyApp());
 }
 

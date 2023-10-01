@@ -14,7 +14,12 @@ class AppColors{
   static const Color textColorLight = Color(0xFFFFFFF7);
 
   static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteLight = Color(0xffd7d7d7);
+  static const Color whiteLightest = Color(0xfffdfdfe);
+
   static const Color black = Color(0xFF000000);
+  static const Color blackLight = Color(0xff707070);
+  static const Color blackLightest = Color(0xff707070);
   static const Color inActiveColors = Color(0xFF5E6A80);
   static const Color dividerColors = Color(0xFF7A7E81);
   static const Color borderColors = Color(0xFF797A7C);
@@ -22,6 +27,13 @@ class AppColors{
   static const Color purpleColors = Color(0xFF5D26CA);
   static const Color redColors = Color(0xFFE15106);
   static const Color darkColors = Color(0xFF56545B);
+
+
+
+
+
+
+  static const Color cardColor = Color(0xFF707070);
 
   //RED
   static const Color red50 = Color(0xFFFFEBEE);

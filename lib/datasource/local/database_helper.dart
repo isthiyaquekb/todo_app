@@ -18,7 +18,6 @@ class DatabaseHelper {
   static const _columnTaskToTime = "taskToTime";
   static const _columnTaskReminder = "reminder";
 
-
   static Future<void> initDB() async {
     if (_database != null) {
       return;
@@ -26,7 +25,7 @@ class DatabaseHelper {
     try {
       String path = '${await getDatabasesPath()}tododb.db';
       _database =
-      await openDatabase(path, version: _version, onCreate: onCreate);
+          await openDatabase(path, version: _version, onCreate: onCreate);
     } catch (ex) {
       log(ex.toString());
     }
@@ -35,15 +34,15 @@ class DatabaseHelper {
   static void onCreate(Database db, int version) async {
     await db.execute(
       "CREATE TABLE $tableTask("
-          "$_columnTaskId INTEGER PRIMARY KEY AUTOINCREMENT,"
-          "$_columnTitle STRING,"
-          "$_columnStatus INTEGER,"
-          "$_columnTaskType STRING,"
-          "$_columnTaskDate STRING,"
-          "$_columnTaskFromTime STRING,"
-          "$_columnTaskToTime STRING,"
-          "$_columnTaskReminder INTEGER"
-          ")",
+      "$_columnTaskId INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "$_columnTitle STRING,"
+      "$_columnStatus INTEGER,"
+      "$_columnTaskType STRING,"
+      "$_columnTaskDate STRING,"
+      "$_columnTaskFromTime STRING,"
+      "$_columnTaskToTime STRING,"
+      "$_columnTaskReminder INTEGER"
+      ")",
     );
     log("CREATING A DB");
   }
@@ -52,10 +51,23 @@ class DatabaseHelper {
   static Future<int> insertTask(TaskItem tasks) async {
     return await _database?.insert(tableTask, tasks.toMap()) ?? 1;
   }
+
   //READ FROM DB
-static Future<List<Map<String, dynamic>>?>readTaskQuery() async {
-  return await _database?.query(tableTask);
-}
+  static Future<List<Map<String, dynamic>>?> readTaskQuery() async {
+    return await _database?.query(tableTask);
+  }
 
-
+  //DELETE FROM DB
+  static deleteTask(TaskItem tasks)async{
+    return await _database?.delete(tableTask,where: '$_columnTaskId=?',whereArgs: [tasks.id]);
+  }
+  //UPDATE DB
+ /* static updateTask(String id, String status) async {
+    int count = await _database!.rawUpdate('''
+    UPDATE $_tableTransactionList
+    SET ${DBHelper._columnTransactionStatus} =?
+    WHERE ${DBHelper._columnTransactionId} = ?
+    ''', [status, id]);
+    log("UPDATE RECEIVE STOCK COUNT:$count");
+  }*/
 }

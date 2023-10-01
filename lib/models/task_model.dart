@@ -67,11 +67,11 @@ class TaskItem {
   Map<String, dynamic> toMap() => {
     "id": id,
     "title": title,
-    "status": status,
+    "status": status== true ? 1 : 0,
     "taskType": taskType,
     "taskDate": taskDate,
     "taskFromTime": taskFromTime,
     "taskToTime": taskToTime,
-    "reminder": reminder,
+    "reminder": reminder == true ? 1 : 0,
   };
 }

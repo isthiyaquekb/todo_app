@@ -56,7 +56,10 @@ class TaskController extends GetxController {
   void isValid() {
     isTaskValid.value = taskFormKey.currentState!.validate();
     Get.focusScope!.unfocus();
-    if (isTaskValid.value && pickedDate.isNotEmpty && pickedFromTime.isNotEmpty && pickedToTime.isNotEmpty) {
+    if (isTaskValid.value &&
+        pickedDate.isNotEmpty &&
+        pickedFromTime.isNotEmpty &&
+        pickedToTime.isNotEmpty) {
       saveTaskInDB(TaskItem(
           title: taskEditController.text,
           status: false,
@@ -84,7 +87,9 @@ class TaskController extends GetxController {
         lastDate: DateTime(2101));
     if (picked != null && picked != initialDate) {
       pickedDate.value = picked.toString();
-      selectedDate.value.isEmpty?selectedDate.value = DateFormat('EEEE d,MMMM').format(picked):selectedDate.value ="Pick a date";
+      selectedDate.value.isEmpty
+          ? selectedDate.value = DateFormat('EEEE d,MMMM').format(picked)
+          : selectedDate.value = "Pick a date";
     }
     update();
   }
@@ -119,21 +124,29 @@ class TaskController extends GetxController {
     log("XXXX TASK FROM TIME XXX :${taskModel.taskFromTime}");
     log("XXXX TASK TO TIME XXX :${taskModel.taskToTime}");
     log("SAVE THIS TO DB:${taskModel.toMap()}");
-
-    try {
+    var localDBResp = await DatabaseHelper.insertTask(taskModel);
+    log("SAVED IN LOCAL DB RESP =>${localDBResp.toString()}");
+    Get.find<DashboardController>().getTaskFromDB();
+    Get.back();
+    /* try {
       var response = await TaskAPI.addTask(taskModel).request();
       if (response != null) {
         log("ADD RESP =>${response.toString()}");
-        var localDBResp=await DatabaseHelper.insertTask(taskModel);
-        log("SAVED IN LOCAL DB RESP =>${localDBResp.toString()}");
+
         Get.find<DashboardController>().getAllTask();
         Get.back();
       }
     } catch (e) {
       throw e.toString();
-    }
+    }*/
   }
 
 // UPDATE TASK
+
 // DELETE TASK
+  void deleteItem(TaskItem deleteTaskItem) async {
+    var localDBResp = await DatabaseHelper.deleteTask(deleteTaskItem);
+    log("DELETED ITEM IN LOCAL DB RESP =>${localDBResp.toString()}");
+    Get.find<DashboardController>().getTaskFromDB();
+  }
 }

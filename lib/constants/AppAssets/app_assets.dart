@@ -31,6 +31,8 @@ class AppAssets {
   static const String familyIcon = "assets/images/svg/family.svg";
   static const String selfCardIcon = "assets/images/svg/heart.svg";
   static const String backIcon = "assets/images/svg/arrow_back.svg";
+  static const String taskCompleteIcon = "assets/images/svg/checkmark_complete.svg";
+  static const String deleteIcon = "assets/images/svg/delete.svg";
 
   // Bottom Nav
   static const String home = "assets/images/svg/home.svg";

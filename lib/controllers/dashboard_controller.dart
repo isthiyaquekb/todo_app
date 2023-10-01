@@ -39,8 +39,14 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   late TabController tabController;
   @override
   void onInit() {
-    tabController=TabController(length: myTabs.length,vsync: this,initialIndex: 0);
+    getTaskFromDB();
     super.onInit();
+    tabController=TabController(length: myTabs.length,vsync: this,initialIndex: 0);
+    tabController.addListener((){
+      selectedTabIndex.value = tabController.index;
+    });
+    update();
+
   }
 
   @override
@@ -52,7 +58,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   @override
   void onReady() {
     // TODO: implement onReady
-    getAllTask();
+    // getAllTask();
     getTaskFromDB();
     super.onReady();
   }
@@ -118,7 +124,10 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
 
   void getTaskFromDB() async {
     var queryTaskDB = await DatabaseHelper.readTaskQuery();
-    taskList.assignAll(queryTaskDB!.map((e) => TaskItem.fromMap(e)).toList());
-
+   if(queryTaskDB!=null) {
+     taskList.assignAll(queryTaskDB.map((e) => TaskItem.fromMap(e)).toList());
+   }
+    log('taskList: ${taskList.length}');
+    update();
   }
 }
