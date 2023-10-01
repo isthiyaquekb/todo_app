@@ -118,7 +118,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
     }).toList();
     // Print the filtered list
     for (final task in filterTaskList) {
-      print('Title: ${task.title}, Task Date: ${task.taskDate}');
+      print('Title: ${task.title}, Task Date: ${task.taskDate} , STATUS: ${task.status}');
     }
   }
 

@@ -35,7 +35,7 @@ class TaskModel {
 class TaskItem {
   final int? id;
   final String title;
-  final bool status;
+  bool status;
   final String taskType;
   final String taskDate;
   final String taskFromTime;

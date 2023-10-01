@@ -141,8 +141,16 @@ class TaskController extends GetxController {
     }*/
   }
 
-// UPDATE TASK
+  void setUpdateStatus(bool isCompleted,index,DashboardController controller){
+    controller.filterTaskList[index].status=!controller.filterTaskList[index].status;
+  }
 
+// UPDATE TASK
+void updateTaskStatus(TaskItem taskItem)async{
+    var updateStatus=await DatabaseHelper.updateTask(taskItem.id!.toInt(),taskItem.status==true ? 1 : 0);
+    log("UPDATED TASK IN LOCAL DB RESP =>${updateStatus.toString()}");
+    Get.find<DashboardController>().getTaskFromDB();
+}
 // DELETE TASK
   void deleteItem(TaskItem deleteTaskItem) async {
     var localDBResp = await DatabaseHelper.deleteTask(deleteTaskItem);

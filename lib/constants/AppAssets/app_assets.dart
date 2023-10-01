@@ -48,6 +48,10 @@ class AppAssets {
 
 
   //Lottie JSON
+  static const String itemNotFoundLottie = "assets/lottie/item_not.json";
+  static const String notFoundLottie = "assets/lottie/not_found.json";
+  static const String searchNotFoundLottie = "assets/lottie/search_not_found.json";
+  static const String searchingLottie = "assets/lottie/searching.json";
   static const String splashLottie = "assets/lottie/fish_jump.json";
   static const String noInternetLottie = "assets/lottie/no_connection.json";
   static const String fishAnimationLottie = "assets/lottie/animation_fish.json";

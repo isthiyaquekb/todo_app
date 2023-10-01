@@ -62,12 +62,12 @@ class DatabaseHelper {
     return await _database?.delete(tableTask,where: '$_columnTaskId=?',whereArgs: [tasks.id]);
   }
   //UPDATE DB
- /* static updateTask(String id, String status) async {
+  static updateTask(int id, int status) async {
     int count = await _database!.rawUpdate('''
-    UPDATE $_tableTransactionList
-    SET ${DBHelper._columnTransactionStatus} =?
-    WHERE ${DBHelper._columnTransactionId} = ?
+    UPDATE $tableTask
+    SET $_columnStatus =?
+    WHERE $_columnTaskId = ?
     ''', [status, id]);
-    log("UPDATE RECEIVE STOCK COUNT:$count");
-  }*/
+    log("UPDATE TASK STATUS:$count");
+  }
 }

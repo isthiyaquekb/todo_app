@@ -7,10 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo_app/constants/AppAssets/app_assets.dart';
 import 'package:todo_app/constants/Colors/app_colors.dart';
 import 'package:todo_app/constants/Routes/app_routes.dart';
 import 'package:todo_app/controllers/dashboard_controller.dart';
+import 'package:todo_app/controllers/task_controller.dart';
 import 'package:todo_app/widgets/task_card_container.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -131,7 +133,7 @@ class DashboardPage extends StatelessWidget {
                                                       vertical: 4.0,
                                                       horizontal: 4.0),
                                               child: TaskCardContainer(
-                                                colorBg: AppColors.cardColor,
+                                                colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                                 title: controller
                                                     .filterTaskList[index]
                                                     .title,
@@ -146,22 +148,28 @@ class DashboardPage extends StatelessWidget {
                                                     .taskToTime,
                                                 tap: () =>
                                                     _bottomUploadImageSheet(
-                                                        context),
+                                                        context,index),
                                               ),
                                             )),
                                   ),
                                 )
-                              : Container(
-                                  height: 120,
+                              : SizedBox(
                                   width: 120,
-                                  color: Colors.amber,
-                                  child: Center(
-                                    child: Text(
-                                      "No item found",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge,
-                                    ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Lottie.asset(AppAssets.searchingLottie,height: 140,
+                                        width: 120,fit: BoxFit.contain),
+                                      Center(
+                                        child: Text(
+                                          "No item found",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge,
+                                        ),
+                                      ),
+                                    ],
                                   )),
                           Container(
                             margin: const EdgeInsets.symmetric(
@@ -174,7 +182,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -186,7 +194,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -202,7 +210,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -214,7 +222,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -230,7 +238,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -242,7 +250,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -258,7 +266,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -270,7 +278,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -286,7 +294,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -298,7 +306,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -314,7 +322,7 @@ class DashboardPage extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 4.0),
                                         child: TaskCardContainer(
-                                          colorBg: AppColors.cardColor,
+                                          colorBg: dashboardController.filterTaskList[index].status?AppColors.green400:AppColors.cardColor,
                                           title: controller
                                               .filterTaskList[index].title,
                                           date: controller
@@ -326,7 +334,7 @@ class DashboardPage extends StatelessWidget {
                                               .filterTaskList[index].taskToTime,
                                           tap: () =>
                                               _bottomUploadImageSheet(
-                                                  context),
+                                                  context,index),
                                         ),
                                       )),
                             ),
@@ -367,7 +375,7 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
-  void _bottomUploadImageSheet(BuildContext ctx) {
+  void _bottomUploadImageSheet(BuildContext ctx,int index) {
     showModalBottomSheet(
         context: ctx,
         backgroundColor: Colors.transparent,
@@ -384,8 +392,8 @@ class DashboardPage extends StatelessWidget {
                           borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(30),
                               topLeft: Radius.circular(30)),
-                          color: dashboardController.isDarkMode.value
-                              ? AppColors.primaryColorLight
+                          color: dashboardController.filterTaskList[index].status
+                              ? AppColors.green400
                               : AppColors.primaryColorDark,
                         ),
                         child: Column(
@@ -402,8 +410,11 @@ class DashboardPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
-                                    onTap: () {
-                                      // profileController.getImage(ImageSource.camera);
+                                    onTap:  dashboardController.filterTaskList[index].status?null:() {
+                                      dashboardController.filterTaskList[index].status=!dashboardController.filterTaskList[index].status;
+                                      log("STATUS:${!dashboardController.filterTaskList[index].status}");
+                                      // Get.put(TaskController()).setUpdateStatus(!dashboardController.filterTaskList[index].status);
+                                      Get.put(TaskController()).updateTaskStatus(dashboardController.filterTaskList[index]);
                                       Get.back();
                                     },
                                     child: Container(
@@ -474,7 +485,7 @@ class DashboardPage extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      // profileController.getImage(ImageSource.gallery);
+                                      Get.put(TaskController()).deleteItem(dashboardController.filterTaskList[index]);
                                       Get.back();
                                     },
                                     child: Container(
