@@ -392,8 +392,9 @@ class DashboardPage extends StatelessWidget {
                           borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(30),
                               topLeft: Radius.circular(30)),
-                          color: dashboardController.filterTaskList[index].status
-                              ? AppColors.green400
+                          color:  dashboardController
+                              .isDarkMode.value
+                              ? AppColors.primaryColorLight
                               : AppColors.primaryColorDark,
                         ),
                         child: Column(
@@ -410,7 +411,7 @@ class DashboardPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
-                                    onTap:  dashboardController.filterTaskList[index].status?null:() {
+                                    onTap:  dashboardController.filterTaskList[index].status?()=>Get.back():() {
                                       dashboardController.filterTaskList[index].status=!dashboardController.filterTaskList[index].status;
                                       log("STATUS:${!dashboardController.filterTaskList[index].status}");
                                       // Get.put(TaskController()).setUpdateStatus(!dashboardController.filterTaskList[index].status);
