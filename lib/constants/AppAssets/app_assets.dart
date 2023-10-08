@@ -18,7 +18,6 @@ class AppAssets {
   static const String userPlaceHolder = "assets/images/png/account_place_holder.png";
 
   //SVG ICONS
-  static const String menu = "assets/images/svg/menu.svg";
   static const String sun = "assets/images/svg/sun_icon.svg";
   static const String moon = "assets/images/svg/moon.svg";
   static const String addIcon = "assets/images/svg/add_icon.svg";
@@ -33,6 +32,7 @@ class AppAssets {
   static const String backIcon = "assets/images/svg/arrow_back.svg";
   static const String taskCompleteIcon = "assets/images/svg/checkmark_complete.svg";
   static const String deleteIcon = "assets/images/svg/delete.svg";
+  static const String menu = "assets/images/svg/menu_alt.svg";
 
   // Bottom Nav
   static const String home = "assets/images/svg/home.svg";

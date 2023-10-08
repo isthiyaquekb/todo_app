@@ -92,7 +92,9 @@ class DashboardPage extends StatelessWidget {
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(AppRoutes.schedule);
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: SvgPicture.asset(

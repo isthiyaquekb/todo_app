@@ -19,6 +19,7 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
 
   var selectedIndex=0.obs;
   var selectedTabIndex = 0.obs;
+  var selectedMonthTabIndex = 0.obs;
   var taskList=<TaskItem>[].obs;
   var filterTaskList=<TaskItem>[].obs;
   final pages = [
@@ -33,6 +34,22 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
     Tab(text: 'Friday'),
     Tab(text: 'Saturday'),
     Tab(text: 'Sunday'),
+
+  ].obs;
+
+  final List<Tab> myMonth = const <Tab>[
+    Tab(text: 'Jan'),
+    Tab(text: 'Feb'),
+    Tab(text: 'Mar'),
+    Tab(text: 'Apr'),
+    Tab(text: 'May'),
+    Tab(text: 'Jun'),
+    Tab(text: 'Jul'),
+    Tab(text: 'Aug'),
+    Tab(text: 'Sep'),
+    Tab(text: 'Oct'),
+    Tab(text: 'Nov'),
+    Tab(text: 'Dec'),
 
   ].obs;
 
@@ -85,6 +102,12 @@ class DashboardController extends GetxController with GetSingleTickerProviderSta
   void changeTabIndex(int index){
     selectedTabIndex.value=index;
     filterTaskByDay(myTabs[index].text.toString());
+    update();
+  }
+
+  void changeMonthTabIndex(int index){
+    selectedMonthTabIndex.value=index;
+
     update();
   }
 

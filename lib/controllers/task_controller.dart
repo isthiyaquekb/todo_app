@@ -8,7 +8,7 @@ import 'package:todo_app/datasource/network/task_api.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/utils/date_time_formatter.dart';
 
-class TaskController extends GetxController {
+class TaskController extends GetxController with GetSingleTickerProviderStateMixin{
   var taskEditController = TextEditingController();
   var taskFormKey = GlobalKey<FormState>();
   var isExpanded = false.obs;
@@ -24,12 +24,15 @@ class TaskController extends GetxController {
   var pickedToTime = "".obs;
   var taskType = "Work".obs;
 
+  late TabController tabController;
+
   @override
   void onInit() {
     initialDate = DateTime.now();
     // selectedDate.value = DateFormat('EEEE d,MMMM').format(initialDate);
     // selectedTime.value = DateTimeFormatter.formatTimeOfDay(initialTime);
     taskEditController = TextEditingController();
+    tabController = TabController(length: 2, vsync: this);
     // GET ALL TASK
     log("TIME NOW:${DateTime.now()}");
     super.onInit();
